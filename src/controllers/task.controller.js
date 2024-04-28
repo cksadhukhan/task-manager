@@ -51,6 +51,51 @@ exports.getAllTasks = (req, res) => {
   });
 };
 
+exports.getTaskWithPriority = (req, res) => {
+  const level = req.params.level.toLowerCase();
+  if (!["low", "medium", "high"].includes(level)) {
+    return res.status(400).send({ message: "Invalid priority level" });
+  }
+
+  const tasksByPriority = tasks.filter((task) => task.priority === level);
+
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 1;
+  const startIndex = (page - 1) * limit;
+  const endIndex = page * limit;
+
+  let next = {};
+  let previous = {};
+
+  if (endIndex < tasksByPriority.length) {
+    next = {
+      page: page + 1,
+      limit: limit,
+    };
+  }
+
+  if (startIndex > 0) {
+    previous = {
+      page: page - 1,
+      limit: limit,
+    };
+  }
+
+  const results = tasksByPriority.slice(startIndex, endIndex);
+
+  if (tasksByPriority.length == 0) {
+    return res.json({
+      data: results,
+    });
+  }
+
+  res.json({
+    data: results,
+    next,
+    previous,
+  });
+};
+
 exports.getTask = (req, res) => {
   const taskId = parseInt(req.params.id);
 
