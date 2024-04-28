@@ -1,4 +1,3 @@
-
 # Task Manager API
 
 ### Project brief
@@ -17,10 +16,9 @@ In this project, I have created a RESTful API using Node.js, Express.js, and NPM
   "title": string,
   "description": string,
   "completed": boolean
-  "priority"?: 'low' | 'medium' | 'high' 
+  "priority"?: 'low' | 'medium' | 'high'
 }
 ```
-
 
 ## Run Locally
 
@@ -54,14 +52,13 @@ Start the development server
   npm run dev
 ```
 
-
-    
 ## Endpoints
 
-| Method | Endpoint                               | Description                        |
-|--------|----------------------------------------|------------------------------------|
+| Method | Endpoint                                        | Description                        |
+| ------ | ----------------------------------------------- | ---------------------------------- |
 | GET    | /tasks/?completed=bool&page=number&limit=number | Retrieve all tasks.                |
-| POST   | /tasks                                 | Create a new task.                 |
-| GET    | /tasks/:id                             | Retrieve a single task by its ID.  |
-| PUT    | /tasks/:id                             | Update an existing task by its ID. |
-| DELETE | /tasks/:id                             | Delete a task by its ID.           |
+| GET    | /tasks/priority/:level?page=number&limit=number | Retrive tasks by priority          |
+| POST   | /tasks                                          | Create a new task.                 |
+| GET    | /tasks/:id                                      | Retrieve a single task by its ID.  |
+| PUT    | /tasks/:id                                      | Update an existing task by its ID. |
+| DELETE | /tasks/:id                                      | Delete a task by its ID.           |
