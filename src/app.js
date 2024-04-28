@@ -1,8 +1,11 @@
 const express = require('express');
 const {taskRoutes} = require("./routes")
+const {loggerMiddleware} = require("./middlewares")
 
 const app = express();
 const port = 3000;
+
+app.use(loggerMiddleware)
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
